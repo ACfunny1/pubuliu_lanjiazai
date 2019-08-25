@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.one {
+			float: left;
+		}
+
+		.one {
+			content: '';
+			display: block;
+			clear: both;
+		}
+	</style>
+</head>
+<body>
+	<div class="one">
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='https://tse4.mm.bing.net/th?id=OIP.lzUHV50eA87SZdT6lWRqQgHaEo&pid=Api&rs=1'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='https://tse3.mm.bing.net/th?id=OIP.jwyAo-TrKtQj6K2AVVzxiAHaEK&pid=Api&rs=1'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='https://tse3.mm.bing.net/th?id=OIP.yswRmHgrfqkdV14b5WMu4QHaEK&pid=Api&rs=1'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic4.nipic.com/20090823/3193830_122340002_2.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic4.bbzhi.com/fengjingbizhi/gaoqingkuanpingfengjingbizhixiazai/gaoqingkuanpingfengjingbizhixiazai_404987_10.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://img.article.pchome.net/00/26/64/42/pic_lib/wm/fgg_003.jpg'>
+		<h2>123</h2>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic4.bbzhi.com/fengjingbizhi/gaoqingziranfengjingzhuomianbizhi/gaoqingziranfengjingzhuomianbizhi_399436_5.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic4.nipic.com/20090813/2990649_211545066_2.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='https://img1.3lian.com/img013/v2/97/d/1.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic4.bbzhi.com/fengjingbizhi/jingmeikuanpingziranfengjingbizhi/jingmeikuanpingziranfengjingbizhi_373339_10.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://pic5.bbzhi.com/fengjingbizhi/shanshuifengjingbizhi/shanshuifengjingbizhi_435454_11.jpg'>
+		<img src="https://www.ecan5.com/images/download/20170716fnmrpg.jpg" src-data='http://www.3fantizi.com/article/pic/20130422001d.jpg'>
+	</div>
+
+
+
+
+
+<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+		
+		<script>
+			function isShow($node) {
+				var winH = $(window).height()
+				var winSt = $(window).scrollTop()
+				return $node.offset().top <= winH + winSt
+				/*注意这个$node的类型 ，$node = $(this)，在后面使用了$(this),里面的值是要带''（引号）的，this不用*/
+			}
+
+			function loading($node){
+				$node.attr('src',$node.attr('src-data'))
+				$node.attr('isLoading',1)/*给已经加载的图片加上isLoading属性*/
+			}
+
+			function start(){
+				$('img').not('[isLoading]').each(function(){/*加载图片的时候就不加载有属性isLoading的了*/
+					if(isShow( $(this) )){
+						loading( $(this) )
+					}
+				})
+			}
+
+
+			start()/*打开页面的时候*/
+
+			$(window).on('scroll',function(){/*滚动事件*/
+				$('img').not('[isLoading]').each(function(){
+					if(isShow( $(this) )){
+						loading( $(this) )
+					}
+				})
+			})
+		</script>
+</body>
+</html>

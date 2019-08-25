@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		.one {
+			width: 600px;
+			margin:0 auto;
+		}
+		img {
+			position: absolute;
+			width: 100px;
+			margin: 10px;
+		}
+	</style>
+</head>
+<body>
+	<div class="one">
+		<img src="http://via.placeholder.com/100x230" class="teo">
+		<img src="http://via.placeholder.com/100x130">
+		<img src="http://via.placeholder.com/100x330">
+		<img src="http://via.placeholder.com/100x260">
+		<img src="http://via.placeholder.com/100x160">
+		<img src="http://via.placeholder.com/100x360">
+		<img src="http://via.placeholder.com/100x200">
+	</div>
+
+
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+	<script type="text/javascript">
+		var colCount 
+		var colHeightArry = []
+		var imgWidth = $('.one img').outerWidth(true)
+
+		colCount = Math.floor($('.one').width()/imgWidth)
+		for(var i = 0 ; i<colCount;i++){
+			colHeightArry[i] = 0
+		}
+
+		$('.one img').on('load',function(){
+			var minValue = colHeightArry[0]
+			var minIndex = 0
+			for(var i = 0;i<colCount;i++){
+				if(colHeightArry[i]<minValue){
+					minValue = colHeightArry[i]
+					minIndex = i
+				}
+			}
+
+			$(this).css({
+				left: imgWidth*minIndex,
+				top: minValue
+			})
+
+			colHeightArry[minIndex] += $(this).outerHeight(true)
+			console.log(colHeightArry)
+		})
+
+
+
+	</script>
+</body>
+</html>
