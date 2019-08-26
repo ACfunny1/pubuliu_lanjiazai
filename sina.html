@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+	<style type="text/css">
+		header {
+			width: 1200px;
+			margin:0 auto;
+		}
+
+		.sinaBox {
+			position: absolute;
+			margin: 10px;
+			width: 313px;
+			border: 1px solid black;
+		}
+
+		.sinaBox img {
+			width: 300px;
+			margin: 5px;
+		}
+
+		#title {
+			margin: 5px;
+		}
+
+		#title2 {
+			margin: 5px;
+			font-size: 14px;
+			font-family: 'Microsoft YaHei'
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<div class="sinaBox">
+			<a href="#">
+				<img src="https://k.sinaimg.cn/n/mil/transform/200/w600h400/20190812/3221-icapxph6255741.jpg/w640slw.jpg">
+			</a>
+			<h4 id="title">争分夺秒！火箭炮修理中国胜</h4>
+			<p id="title2">争分夺秒！中国参赛队用时最少最终拿下火箭炮修理赛</p>
+		</div>
+	</header>
+	<div class="see">123</div>
+
+	<script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+	<script>
+			var colHeightArray = []
+			var divWidth = $('.sinaBox').outerWidth(true)
+			var colCount = Math.floor($('header').width()/divWidth)
+
+			for(var i=0 ; i<colCount ; i++){
+				colHeightArray[i] = 0
+			}
+
+			var newsCount = 20
+			var pageNumber = 1
+
+			sinaAjax()
+
+			function sinaAjax(){
+					$.ajax({
+					url: 'https://photo.sina.cn/aj/v2/index?cate=military',
+					dataType: 'jsonp',
+					jsonp: 'callback',
+					data: {
+						pagesize: newsCount,//数量
+						page: pageNumber //页数
+					}
+				}).done(function(ret){
+					loadingRet(ret)
+					pubuliu($('.sinaBox'))
+				})
+			}
+
+
+			
+		
+		function loadingRet(ret){
+			var tpl = `		<div class="sinaBox">
+			<a href="#">
+				<img src="https://k.sinaimg.cn/n/mil/transform/200/w600h400/20190812/3221-icapxph6255741.jpg/w640slw.jpg">
+			</a>
+			<h4 id="title">争分夺秒！火箭炮修理中国胜</h4>
+			<p id="title2">争分夺秒！中国参赛队用时最少最终拿下火箭炮修理赛</p>
+		</div>`
+			ret.data.forEach(function(e){
+				var $node = $(tpl).appendTo('header')
+				$node.find('a').attr('href',e.url)
+				$node.find('img').attr('src',e.thumb)
+				$node.find('#title').text(e.stitle)
+				$node.find('#title2').text(e.title)
+			})
+		}
+
+
+
+		function pubuliu($node){
+
+		$node.each(function(){
+			var minValue = colHeightArray[0]
+			var minIndex = 0
+			var $cur = $(this)
+			for(var i=0 ; i<colCount ; i++){
+				if(colHeightArray[i]<minValue){
+					minValue=colHeightArray[i]
+					minIndex = i
+				}
+			}
+
+			$cur.css({
+				left: minIndex*divWidth,
+				top: minValue
+			})
+
+			colHeightArray[minIndex] += $cur.outerHeight(true)
+			})
+			$('header').height(Math.max.apply(null,colHeightArray))
+		}
+
+
+		function lanjiazai(){
+
+		}
+
+		$(window).on('scroll',function(){
+			console.log('header.height()')
+			console.log($('header').height())
+			console.log('windowScrollTop')
+			console.log($(window).scrollTop())
+			console.log('windowHeight')
+			console.log($(window).height())
+			console.log($('.see').offset().top)
+			/*判断滚动到底部的是
+			windowScrollTop+windowHeight>=$('.see').offset().top*/
+		})
+	</script>
+</body>
+</html>

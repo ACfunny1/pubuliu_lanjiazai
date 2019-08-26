@@ -54,9 +54,32 @@
 			})
 
 			colHeightArry[minIndex] += $(this).outerHeight(true)
-			console.log(colHeightArry)
 		})
 
+
+		/*function abc(){
+		$('.one img').each(function(){
+			var _this = $(this)
+			var minValue = colHeightArry[0]
+			var minIndex = 0
+			for(var i = 0;i<colCount;i++){
+				if(colHeightArry[i]<minValue){
+					minValue = colHeightArry[i]
+					minIndex = i
+				}
+			}
+
+			_this.css({
+				left: imgWidth*minIndex,
+				top: minValue
+			})
+
+			colHeightArry[minIndex] += _this.outerHeight(true)
+			console.log(colHeightArry)
+		})
+		}
+
+		abc()*/
 
 
 	</script>
